@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colores Light Mode -->
+    <color name="background_light_primary">#F5F5F5</color>
+    <color name="background_light_secondary">#FFFFFF</color>
+    <color name="background_gradient_start">#F5F5F5</color>
+    <color name="background_gradient_end">#E8E8E8</color>
+
+    <!-- Colores de la tarjeta y componentes -->
+    <color name="card_background">#FFFFFF</color>
+    <color name="primary_teal">#00D4AA</color>
+    <color name="primary_teal_light">#5FEDD8</color>
+    <color name="primary_green">#34D399</color>
+    <color name="primary_purple">#7C3AED</color>
+
+    <!-- Colores de texto -->
+    <color name="text_primary">#1F2937</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_hint">#9CA3AF</color>
+
+    <!-- Colores de inputs -->
+    <color name="input_background">#F9FAFB</color>
+    <color name="input_border">#E5E7EB</color>
+    <color name="input_focused">#00D4AA</color>
+
+    <!-- Colores de botones -->
+    <color name="button_primary">#7C3AED</color>
+    <color name="button_primary_dark">#6D28D9</color>
+    <color name="button_gradient_start">#7C3AED</color>
+    <color name="button_gradient_end">#6D28D9</color>
+
+    <!-- Colores de acento -->
+    <color name="accent_coral">#FF8A73</color>
+    <color name="accent_orange">#FB923C</color>
+
+    <!-- Colores de redes sociales -->
+    <color name="social_border">#E5E7EB</color>
+    <color name="facebook_color">#1877F2</color>
+    <color name="google_color">#EA4335</color>
+
+    <!-- Colores de sistema -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Colores de estado -->
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    <color name="info">#3B82F6</color>
 </resources>

@@ -1,9 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.GastoApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <!-- Light Mode -->
+    <style name="Base.Theme.GastoApp" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary_teal</item>
+        <item name="colorOnPrimary">@color/text_white</item>
+        <item name="colorPrimaryContainer">@color/button_primary</item>
+        <item name="colorOnPrimaryContainer">@color/text_white</item>
+        <item name="android:colorBackground">@color/background_light_primary</item>
+        <item name="colorSurface">@color/card_background</item>
+
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">true</item>
     </style>
 
     <style name="Theme.GastoApp" parent="Base.Theme.GastoApp" />
+
+    <!-- Splash Screen -->
+    <style name="Theme.Splash" parent="Theme.GastoApp">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+    </style>
+
 </resources>

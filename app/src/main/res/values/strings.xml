@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">GastoApp</string>
+
+    <!-- Login Screen -->
+    <string name="sign_in">Iniciar Sesión</string>
+    <string name="already_registered">Si ya tienes una cuenta</string>
+    <string name="username_email">Usuario/Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in_button">Iniciar Sesión</string>
+    <string name="dont_have_account">¿No tienes una cuenta?</string>
+    <string name="sign_up_link">Registrarse</string>
+
+    <!-- Register Screen -->
+    <string name="sign_up">Registrarse</string>
+    <string name="create_new_account">Crear una nueva cuenta</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="email">Correo</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="sign_up_button">REGISTRARSE</string>
+    <string name="already_have_account">¿Ya tienes una cuenta?</string>
+    <string name="sign_in_link">Iniciar Sesión</string>
+
+    <!-- Validation Messages -->
+    <string name="error_empty_field">Campo vacío</string>
+    <string name="error_invalid_email">Por favor ingrese un correo electrónico válido</string>
+    <string name="error_password_short">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_passwords_not_match">Las contraseñas no coinciden</string>
+
+    <!-- General -->
+    <string name="or_continue_with">O continuar con</string>
 </resources>

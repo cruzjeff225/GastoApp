@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.auth.LoginActivity">
+
+    <!-- Card Container -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="@dimen/card_margin"
+        android:layout_marginEnd="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="8dp"
+        android:background="@drawable/background_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/card_padding"
+            android:gravity="center_horizontal">
+
+            <!-- Logo Icon -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/icon_logo_size"
+                android:layout_height="@dimen/icon_logo_size"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                android:layout_marginBottom="@dimen/margin_large">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_dollar"
+                    android:padding="16dp"
+                    android:background="@color/card_background"
+                    android:contentDescription="@string/app_name" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in"
+                android:textSize="@dimen/text_title"
+                android:textColor="@color/text_primary"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_small" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/already_registered"
+                android:textSize="@dimen/text_subtitle"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="@dimen/margin_large" />
+
+            <!-- Email Input -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:background="@drawable/background_input"
+                android:hint="@string/username_email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="@dimen/input_padding_horizontal"
+                android:paddingEnd="@dimen/input_padding_horizontal"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_body"
+                android:layout_marginBottom="@dimen/margin_medium" />
+
+            <!-- Password Input -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/input_height"
+                android:background="@drawable/background_input"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="@dimen/input_padding_horizontal"
+                android:paddingEnd="@dimen/input_padding_horizontal"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/text_body"
+                android:layout_marginBottom="@dimen/margin_large" />
+
+            <!-- Sign In Button -->
+            <Button
+                android:id="@+id/btnSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/background_button_pressed"
+                android:text="@string/sign_in_button"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_button"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/margin_large" />
+
+            <!-- Social Login Icons -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/margin_medium">
+
+                <!-- X -->
+                <ImageView
+                    android:id="@+id/ivTwitter"
+                    android:layout_width="@dimen/icon_social_size"
+                    android:layout_height="@dimen/icon_social_size"
+                    android:padding="@dimen/icon_social_padding"
+                    android:background="@drawable/x"
+                    android:tint="@color/social_border"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:contentDescription="X" />
+
+                <!-- Facebook -->
+                <ImageView
+                    android:id="@+id/ivFacebook"
+                    android:layout_width="@dimen/icon_social_size"
+                    android:layout_height="@dimen/icon_social_size"
+                    android:padding="@dimen/icon_social_padding"
+                    android:background="@drawable/facebook"
+                    android:tint="@color/social_border"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:contentDescription="Facebook" />
+
+                <!-- Google -->
+                <ImageView
+                    android:id="@+id/ivGoogle"
+                    android:layout_width="@dimen/icon_social_size"
+                    android:layout_height="@dimen/icon_social_size"
+                    android:padding="@dimen/icon_social_padding"
+                    android:background="@drawable/google"
+                    android:tint="@color/social_border"
+                    android:contentDescription="Google" />
+
+            </LinearLayout>
+
+            <!-- Sign Up Link -->
+            <TextView
+                android:id="@+id/tvSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dont_have_account"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_subtitle" />
+
+            <TextView
+                android:id="@+id/tvSignUpLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up_link"
+                android:textColor="@color/accent_coral"
+                android:textSize="@dimen/text_subtitle"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

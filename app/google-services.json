@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073433510140",
+    "project_id": "gastoapp-e8f0a",
+    "storage_bucket": "gastoapp-e8f0a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073433510140:android:22bbfafcad9775c0aa5779",
+        "android_client_info": {
+          "package_name": "com.cruzjeff225.gastoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAakwDlnOlh8IIatQzu8q0amqeKcvHokYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
