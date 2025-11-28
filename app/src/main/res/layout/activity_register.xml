@@ -148,7 +148,6 @@
                     android:layout_height="@dimen/icon_social_size"
                     android:padding="@dimen/icon_social_padding"
                     android:background="@drawable/x"
-                    android:tint="@color/social_border"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:contentDescription="Twitter" />
 
@@ -159,7 +158,6 @@
                     android:layout_height="@dimen/icon_social_size"
                     android:padding="@dimen/icon_social_padding"
                     android:background="@drawable/facebook"
-                    android:tint="@color/social_border"
                     android:layout_marginEnd="@dimen/margin_medium"
                     android:contentDescription="Facebook" />
 
@@ -170,7 +168,6 @@
                     android:layout_height="@dimen/icon_social_size"
                     android:padding="@dimen/icon_social_padding"
                     android:background="@drawable/google"
-                    android:tint="@color/social_border"
                     android:contentDescription="Google" />
 
             </LinearLayout>
