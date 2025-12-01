@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,13 +14,12 @@
         android:layout_height="60dp"
         android:background="@drawable/bg_icon_circle">
 
-        <TextView
-            android:id="@+id/tvCategoryIcon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="🍔"
-            android:textSize="30sp"
-            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_expense_comida" />
     </FrameLayout>
 
     <TextView

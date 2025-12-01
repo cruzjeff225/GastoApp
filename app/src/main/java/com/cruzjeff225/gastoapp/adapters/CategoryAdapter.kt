@@ -36,17 +36,17 @@ class CategoryAdapter(
 
         fun bind(category: Category, isSelected: Boolean) {
             with(binding) {
-                tvCategoryIcon.text = category.icon
+                ivCategoryIcon.setImageResource(category.icon)
                 tvCategoryName.text = category.name
 
                 // Color selected category
                 if (isSelected) {
                     categoryBackground.setBackgroundColor(Color.parseColor(category.color))
-                    tvCategoryIcon.alpha = 1f
+                    ivCategoryIcon.alpha = 1f
                     tvCategoryName.setTextColor(Color.parseColor(category.color))
                 } else {
                     categoryBackground.setBackgroundColor("#F5F5F7".toColorInt())
-                    tvCategoryIcon.alpha = 0.7f
+                    ivCategoryIcon.alpha = 0.7f
                     tvCategoryName.setTextColor("#9CA3AF".toColorInt())
                 }
 

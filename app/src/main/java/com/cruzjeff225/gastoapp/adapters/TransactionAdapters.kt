@@ -3,16 +3,17 @@ package com.cruzjeff225.gastoapp.adapters
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cruzjeff225.gastoapp.R
 import com.cruzjeff225.gastoapp.databinding.ItemTransactionBinding
 import com.cruzjeff225.gastoapp.data.model.Categories
 import com.cruzjeff225.gastoapp.data.model.Transaction
 import com.cruzjeff225.gastoapp.data.model.TransactionType
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.core.graphics.toColorInt
 
 class TransactionAdapter(
     private val onItemClick: (Transaction) -> Unit,
@@ -40,7 +41,7 @@ class TransactionAdapter(
             with(binding) {
                 // Category
                 val category = Categories.getCategoryByName(transaction.category)
-                tvCategoryIcon.text = category?.icon ?: "📦"
+                ivCategoryIcon.setImageResource(category?.icon ?: android.R.drawable.sym_def_app_icon)
                 tvCategory.text = transaction.category
 
                 // Format date
@@ -54,21 +55,22 @@ class TransactionAdapter(
                 tvAmount.text = if (isIncome) "+$${amountValue}" else "-$${amountValue}"
 
                 // Colors
-                val amountColor = if (isIncome) Color.parseColor("#4CAF50") else Color.parseColor("#F44336")
-                val bgColor = if (isIncome) Color.parseColor("#E8F5E9") else Color.parseColor("#FFEBEE")
+                val amountColor = if (isIncome) "#4CAF50".toColorInt() else "#F44336".toColorInt()
+                val bgColor = if (isIncome) "#E8F5E9".toColorInt() else "#FFEBEE".toColorInt()
 
                 tvAmount.setTextColor(amountColor)
-                iconBackground.setBackgroundColor(bgColor)
+                DrawableCompat.setTint(iconBackground.background, bgColor)
+
 
                 // Arrow indicator
                 if (isIncome) {
                     ivArrow.visibility = android.view.View.VISIBLE
                     ivArrow.setImageResource(android.R.drawable.arrow_up_float)
-                    ivArrow.setColorFilter(Color.parseColor("#4CAF50"))
+                    ivArrow.setColorFilter("#4CAF50".toColorInt())
                 } else {
                     ivArrow.visibility = android.view.View.VISIBLE
                     ivArrow.setImageResource(android.R.drawable.arrow_down_float)
-                    ivArrow.setColorFilter(Color.parseColor("#F44336"))
+                    ivArrow.setColorFilter("#F44336".toColorInt())
                 }
 
                 // Click listeners

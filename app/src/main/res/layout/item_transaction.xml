@@ -17,13 +17,12 @@
         android:layout_height="42dp"
         android:background="@drawable/bg_icon_circle">
 
-        <TextView
-            android:id="@+id/tvCategoryIcon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="🍔"
-            android:textSize="24sp"
-            android:gravity="center"/>
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_expense_comida"/>
 
         <!-- Arrow indicator -->
         <ImageView
