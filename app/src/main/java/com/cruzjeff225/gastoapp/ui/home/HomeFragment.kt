@@ -1,12 +1,16 @@
 package com.cruzjeff225.gastoapp.ui.home
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +18,7 @@ import com.cruzjeff225.gastoapp.R
 import com.cruzjeff225.gastoapp.adapters.TransactionAdapter
 import com.cruzjeff225.gastoapp.databinding.FragmentHomeBinding
 import com.cruzjeff225.gastoapp.data.model.Transaction
+import com.cruzjeff225.gastoapp.ui.transaction.AddTransactionActivity
 import com.cruzjeff225.gastoapp.utils.gone
 import com.cruzjeff225.gastoapp.utils.showToast
 import com.cruzjeff225.gastoapp.utils.visible
@@ -30,6 +35,15 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: TransactionAdapter
 
     private var selectedPeriod = "Semana"
+
+    // Activity result launcher
+    private val addTransactionLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            refreshData()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +62,7 @@ class HomeFragment : Fragment() {
         setupListeners()
         updateMonthLabel()
 
-        // Select Week by default
+        // Select week by default
         selectPeriod("Semana", binding.btnWeek)
     }
 
@@ -65,6 +79,7 @@ class HomeFragment : Fragment() {
         binding.rvRecentTransactions.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@HomeFragment.adapter
+            setHasFixedSize(false)
         }
     }
 
@@ -82,15 +97,20 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.transactions.observe(viewLifecycleOwner) { transactions ->
-            val filteredTransactions = filterTransactionsByPeriod(transactions)
-            adapter.submitList(filteredTransactions)
 
             if (transactions.isEmpty()) {
                 binding.emptyState.visible()
                 binding.rvRecentTransactions.gone()
+                adapter.submitList(emptyList())
             } else {
                 binding.emptyState.gone()
                 binding.rvRecentTransactions.visible()
+
+                val filteredTransactions = filterTransactionsByPeriod(transactions)
+
+                // Crear una nueva lista para forzar la actualización
+                adapter.submitList(filteredTransactions.toList()) {
+                }
             }
         }
 
@@ -99,7 +119,9 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
-            error?.let { requireContext().showToast(it) }
+            error?.let {
+                requireContext().showToast(it)
+            }
         }
     }
 
@@ -119,12 +141,18 @@ class HomeFragment : Fragment() {
         binding.ivProfile.setOnClickListener {
             requireContext().showToast("Perfil")
         }
+
+        // FAB click
+        binding.fabAddTransaction.setOnClickListener {
+            val intent = Intent(requireContext(), AddTransactionActivity::class.java)
+            addTransactionLauncher.launch(intent)
+        }
     }
 
     private fun selectPeriod(period: String, selectedButton: TextView) {
         selectedPeriod = period
 
-        // Reset all buttons
+        // Clear all buttons
         resetPeriodButtons()
 
         // Highlight selected
@@ -135,7 +163,7 @@ class HomeFragment : Fragment() {
         // Refresh list
         viewModel.transactions.value?.let { transactions ->
             val filtered = filterTransactionsByPeriod(transactions)
-            adapter.submitList(filtered)
+            adapter.submitList(filtered.toList())
         }
     }
 
@@ -149,19 +177,23 @@ class HomeFragment : Fragment() {
 
     private fun filterTransactionsByPeriod(transactions: List<Transaction>): List<Transaction> {
         val calendar = Calendar.getInstance()
+        val now = calendar.timeInMillis
 
         return when (selectedPeriod) {
             "Semana" -> {
                 calendar.add(Calendar.DAY_OF_YEAR, -7)
-                transactions.filter { it.date >= calendar.timeInMillis }
+                val startTime = calendar.timeInMillis
+                transactions.filter { it.date >= startTime && it.date <= now }
             }
             "Mes" -> {
                 calendar.add(Calendar.MONTH, -1)
-                transactions.filter { it.date >= calendar.timeInMillis }
+                val startTime = calendar.timeInMillis
+                transactions.filter { it.date >= startTime && it.date <= now }
             }
             "Año" -> {
                 calendar.add(Calendar.YEAR, -1)
-                transactions.filter { it.date >= calendar.timeInMillis }
+                val startTime = calendar.timeInMillis
+                transactions.filter { it.date >= startTime && it.date <= now }
             }
             else -> transactions
         }
@@ -169,7 +201,10 @@ class HomeFragment : Fragment() {
 
     private fun updateMonthLabel() {
         val dateFormat = SimpleDateFormat("MMMM", Locale.getDefault())
-        binding.tvMonthLabel.text = dateFormat.format(Date())
+        val month = dateFormat.format(Date())
+        binding.tvMonthLabel.text = month.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+        }
     }
 
     fun refreshData() {
@@ -186,6 +221,12 @@ class HomeFragment : Fragment() {
             }
             .setNegativeButton("Cancelar", null)
             .show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh data when fragment resumes
+        refreshData()
     }
 
     override fun onDestroyView() {

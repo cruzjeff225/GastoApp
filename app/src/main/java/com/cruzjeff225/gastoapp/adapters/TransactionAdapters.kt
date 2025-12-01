@@ -43,7 +43,7 @@ class TransactionAdapter(
                 tvCategoryIcon.text = category?.icon ?: "📦"
                 tvCategory.text = transaction.category
 
-                // Date: dd.MM.yyyy
+                // Format date
                 val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
                 tvDate.text = dateFormat.format(Date(transaction.date))
 
@@ -51,7 +51,7 @@ class TransactionAdapter(
                 val isIncome = transaction.type == TransactionType.INCOME
                 val amountValue = transaction.amount.toInt()
 
-                tvAmount.text = if (isIncome) "+$amountValue" else "-$amountValue"
+                tvAmount.text = if (isIncome) "+$${amountValue}" else "-$${amountValue}"
 
                 // Colors
                 val amountColor = if (isIncome) Color.parseColor("#4CAF50") else Color.parseColor("#F44336")
@@ -61,11 +61,12 @@ class TransactionAdapter(
                 iconBackground.setBackgroundColor(bgColor)
 
                 // Arrow indicator
-                ivArrow.visibility = if (isIncome) android.view.View.VISIBLE else android.view.View.GONE
                 if (isIncome) {
+                    ivArrow.visibility = android.view.View.VISIBLE
                     ivArrow.setImageResource(android.R.drawable.arrow_up_float)
                     ivArrow.setColorFilter(Color.parseColor("#4CAF50"))
                 } else {
+                    ivArrow.visibility = android.view.View.VISIBLE
                     ivArrow.setImageResource(android.R.drawable.arrow_down_float)
                     ivArrow.setColorFilter(Color.parseColor("#F44336"))
                 }

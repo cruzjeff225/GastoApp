@@ -38,6 +38,14 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!-- Activity for Add Transactions -->
+        <activity
+            android:name=".ui.transaction.AddTransactionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GastoApp" />
+
+
     </application>
 
 </manifest>
