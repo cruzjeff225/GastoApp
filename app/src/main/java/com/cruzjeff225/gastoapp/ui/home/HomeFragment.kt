@@ -200,10 +200,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateMonthLabel() {
-        val dateFormat = SimpleDateFormat("MMMM", Locale.getDefault())
+        val spanishLocale = Locale("es", "ES")
+        val dateFormat = SimpleDateFormat("MMMM", spanishLocale)
         val month = dateFormat.format(Date())
         binding.tvMonthLabel.text = month.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            if (it.isLowerCase()) it.titlecase(spanishLocale) else it.toString()
         }
     }
 
