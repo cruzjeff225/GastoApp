@@ -8,6 +8,8 @@ import com.google.firebase.firestore.Query
 import com.cruzjeff225.gastoapp.data.model.Transaction
 import com.cruzjeff225.gastoapp.data.model.TransactionType
 import com.cruzjeff225.gastoapp.data.model.SavingsGoal
+import com.cruzjeff225.gastoapp.data.model.User
+import com.google.firebase.auth.EmailAuthProvider
 import com.cruzjeff225.gastoapp.utils.Constants
 import kotlinx.coroutines.tasks.await
 import java.util.Date
@@ -251,6 +253,140 @@ class AuthRepository {
         return transactions
             .groupBy { it.category }
             .mapValues { (_, trans) -> trans.sumOf { it.amount } }
+    }
+
+
+    // Profile Options
+
+    // Get current user info
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
+    }
+
+    // Get user data from Firestore
+    suspend fun getUserData(userId: String): Result<User> {
+        return try {
+            val snapshot = firestore.collection(Constants.USERS_COLLECTION)
+                .document(userId)
+                .get()
+                .await()
+
+            val user = snapshot.toObject(User::class.java)?.copy(id = snapshot.id)
+
+            if (user != null) {
+                Result.success(user)
+            } else {
+                Result.failure(Exception("Usuario no encontrado"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Update user data
+    suspend fun updateUserData(user: User): Result<Unit> {
+        return try {
+            firestore.collection(Constants.USERS_COLLECTION)
+                .document(user.id)
+                .set(user)
+                .await()
+
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Update user profile (name)
+    suspend fun updateUserProfile(displayName: String): Result<Unit> {
+        return try {
+            val user = auth.currentUser
+            if (user != null) {
+                val profileUpdates = UserProfileChangeRequest.Builder()
+                    .setDisplayName(displayName)
+                    .build()
+                user.updateProfile(profileUpdates).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Usuario no autenticado"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Change password
+    suspend fun changePassword(currentPassword: String, newPassword: String): Result<Unit> {
+        return try {
+            val user = auth.currentUser
+            val email = user?.email
+
+            if (user != null && email != null) {
+                // Re-authenticate user
+                val credential = EmailAuthProvider.getCredential(email, currentPassword)
+                user.reauthenticate(credential).await()
+
+                // Update password
+                user.updatePassword(newPassword).await()
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Usuario no autenticado"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    // Delete account
+    suspend fun deleteAccount(password: String): Result<Unit> {
+        return try {
+            val user = auth.currentUser
+            val email = user?.email
+
+            if (user != null && email != null) {
+                // Re-authenticate
+                val credential = EmailAuthProvider.getCredential(email, password)
+                user.reauthenticate(credential).await()
+
+                // Delete user data from Firestore
+                val userId = user.uid
+
+                // Delete transactions
+                val transactionsSnapshot = firestore.collection(Constants.TRANSACTIONS_COLLECTION)
+                    .whereEqualTo("userId", userId)
+                    .get()
+                    .await()
+
+                transactionsSnapshot.documents.forEach { doc ->
+                    doc.reference.delete().await()
+                }
+
+                // Delete savings goals
+                val goalsSnapshot = firestore.collection(Constants.SAVINGS_GOALS_COLLECTION)
+                    .whereEqualTo("userId", userId)
+                    .get()
+                    .await()
+
+                goalsSnapshot.documents.forEach { doc ->
+                    doc.reference.delete().await()
+                }
+
+                // Delete user document
+                firestore.collection(Constants.USERS_COLLECTION)
+                    .document(userId)
+                    .delete()
+                    .await()
+
+                // Delete Firebase Auth account
+                user.delete().await()
+
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Usuario no autenticado"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     companion object {

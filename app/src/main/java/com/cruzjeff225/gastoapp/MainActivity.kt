@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import com.cruzjeff225.gastoapp.databinding.ActivityMainBinding
 import com.cruzjeff225.gastoapp.ui.home.HomeFragment
 import com.cruzjeff225.gastoapp.ui.savingsgoal.SavingsGoalsFragment
+import com.cruzjeff225.gastoapp.ui.profile.ProfileFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,9 +45,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_profile -> {
                     // Create ProfileFragment
-                    showToast("Perfil - Próximamente")
-                    false
+                    loadFragment(ProfileFragment())
+                    true
                 }
+
                 else -> false
             }
         }
