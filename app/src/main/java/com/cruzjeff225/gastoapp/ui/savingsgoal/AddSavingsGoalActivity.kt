@@ -26,7 +26,6 @@ class AddSavingsGoalActivity : AppCompatActivity() {
     private val repository = AuthRepository.getInstance()
 
     private var selectedIcon = R.drawable.ic_goal_general
-    private var selectedColor = "#7C3AED"
     private var selectedDeadline: Long? = null
     private var isEditMode = false
     private var editingGoalId: String? = null
@@ -80,11 +79,10 @@ class AddSavingsGoalActivity : AppCompatActivity() {
         binding.etDescription.setText(goal.description)
 
         selectedIcon = goal.icon
-        selectedColor = goal.color
         selectedDeadline = goal.deadline
 
         iconAdapter.setSelectedIcon(selectedIcon)
-        colorAdapter.setSelectedColor(selectedColor)
+        colorAdapter.setSelectedColor(goal.color)
 
         if (selectedDeadline != null) {
             updateDeadlineDisplay()
@@ -95,6 +93,7 @@ class AddSavingsGoalActivity : AppCompatActivity() {
     private fun setupIconRecyclerView() {
         iconAdapter = IconAdapter(SavingsGoalIcons.icons) { iconRes ->
             selectedIcon = iconRes
+            Log.d("AddSavingsGoal", "Selected icon: $iconRes")
         }
 
         binding.rvIcons.apply {
@@ -105,6 +104,7 @@ class AddSavingsGoalActivity : AppCompatActivity() {
 
     private fun setupColorRecyclerView() {
         colorAdapter = ColorAdapter(SavingsGoalColors.colors)
+
         binding.rvColors.apply {
             layoutManager = GridLayoutManager(this@AddSavingsGoalActivity, 5)
             adapter = colorAdapter
@@ -219,6 +219,10 @@ class AddSavingsGoalActivity : AppCompatActivity() {
 
         val description = binding.etDescription.text.toString().trim()
 
+        // Obtener el color seleccionado del adapter
+        val selectedColor = colorAdapter.selectedColor
+        Log.d("AddSavingsGoal", "Saving with color: $selectedColor")
+
         val goal = SavingsGoal(
             userId = userId,
             name = name,
@@ -292,6 +296,10 @@ class AddSavingsGoalActivity : AppCompatActivity() {
 
         val description = binding.etDescription.text.toString().trim()
 
+        // Obtener el color seleccionado del adapter
+        val selectedColor = colorAdapter.selectedColor
+        Log.d("AddSavingsGoal", "Updating with color: $selectedColor")
+
         val goal = SavingsGoal(
             id = editingGoalId ?: "",
             userId = userId,
@@ -314,6 +322,7 @@ class AddSavingsGoalActivity : AppCompatActivity() {
             val result = repository.updateSavingsGoal(goal)
 
             result.onSuccess {
+                Log.d("AddSavingsGoal", "Goal updated")
                 showToast("Meta actualizada")
                 setResult(RESULT_OK)
                 finish()

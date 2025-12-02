@@ -56,9 +56,9 @@ class SavingsGoalAdapter(
 
                     // Color warning for near deadline
                     if (daysRemaining in 0..7) {
-                        tvDeadline.setTextColor(Color.parseColor("#F59E0B"))
+                        tvDeadline.setTextColor("#F59E0B".toColorInt())
                     } else {
-                        tvDeadline.setTextColor(Color.parseColor("#6B7280"))
+                        tvDeadline.setTextColor("#6B7280".toColorInt())
                     }
                 } else {
                     tvDeadline.visibility = View.GONE
@@ -85,9 +85,9 @@ class SavingsGoalAdapter(
                 // Apply goal color to icon background
                 try {
                     val backgroundColor = Color.parseColor(goal.color + "33") // 33 = 20% opacity
-                    (ivGoalIcon.parent as? android.view.View)?.setBackgroundColor(backgroundColor)
+                    ivGoalIcon.setBackgroundColor(backgroundColor)
                 } catch (e: Exception) {
-                    (ivGoalIcon.parent as? android.view.View)?.setBackgroundColor(Color.parseColor("#F5F5F7"))
+                    ivGoalIcon.setBackgroundColor("#F5F5F7".toColorInt())
                 }
 
                 // Percentage or Completed badge
@@ -101,6 +101,7 @@ class SavingsGoalAdapter(
 
                     // Color badge based on goal color
                     try {
+                        android.util.Log.d("SavingsGoalAdapter", "Goal color: ${goal.color}")
                         tvPercentage.setTextColor(goal.color.toColorInt())
                         tvPercentage.setBackgroundColor((goal.color + "20").toColorInt()) // 20% opacity
                     } catch (e: Exception) {
