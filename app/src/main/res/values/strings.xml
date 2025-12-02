@@ -28,4 +28,11 @@
 
     <!-- General -->
     <string name="or_continue_with">O continuar con</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_goals">Metas</string>
+    <string name="nav_stats">Estadísticas</string>
+    <string name="nav_profile">Perfil</string>
+
 </resources>

@@ -45,6 +45,12 @@
             android:exported="false"
             android:theme="@style/Theme.GastoApp" />
 
+        <!-- Activity for Savings Goals -->
+        <activity
+            android:name=".ui.savingsgoal.AddSavingsGoalActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GastoApp" />
+
 
     </application>
 

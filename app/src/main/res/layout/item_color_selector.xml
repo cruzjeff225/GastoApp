@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/colorContainer"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_margin="6dp">
+
+    <!-- Color Circle -->
+    <View
+        android:id="@+id/viewColor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_icon_circle"/>
+
+    <!-- Selected Indicator -->
+    <TextView
+        android:id="@+id/tvSelected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="✓"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+</FrameLayout>
