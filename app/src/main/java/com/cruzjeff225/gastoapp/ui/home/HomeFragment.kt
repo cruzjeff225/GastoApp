@@ -155,10 +155,6 @@ class HomeFragment : Fragment() {
             selectPeriod("Año", binding.btnYear)
         }
 
-        binding.ivProfile.setOnClickListener {
-            requireContext().showToast("Perfil")
-        }
-
         // FAB click
         binding.fabAddTransaction.setOnClickListener {
             val intent = Intent(requireContext(), AddTransactionActivity::class.java)

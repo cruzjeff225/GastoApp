@@ -6,314 +6,300 @@
     android:layout_height="match_parent"
     android:background="#FAFAFA">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background_light_primary">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="0dp"
+            app:shapeAppearance="@style/ShapeAppearance.App.Corner.Bottom">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/tvMonthLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Noviembre"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvBalance"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <!-- Balance -->
+                <TextView
+                    android:id="@+id/tvBalanceSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="24sp"
+                    android:textColor="@color/text_secondary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tvBalance"/>
+
+                <TextView
+                    android:id="@+id/tvBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintTop_toTopOf="@id/tvBalanceSymbol"
+                    app:layout_constraintStart_toEndOf="@id/tvBalanceSymbol"
+                    app:layout_constraintBottom_toBottomOf="@id/tvBalanceSymbol"/>
+
+                <!-- Period Selector -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_icon_circle"
+                    android:padding="4dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/tvMonthLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <TextView
+                        android:id="@+id/btnWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Semana"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_primary"
+                        android:textStyle="bold"
+                        android:background="@drawable/bg_period_buttom_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/btnMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mes"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:background="@drawable/bg_buttom_selector"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+
+                    <TextView
+                        android:id="@+id/btnYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Año"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:background="@drawable/bg_buttom_selector"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"/>
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <!-- Content Area -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Header Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
+            <!-- Upcoming Bills Title -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="@color/white">
+                android:text="Resumen del Mes"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="12dp"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp">
-
-                    <!-- Balance -->
-                    <TextView
-                        android:id="@+id/tvBalanceSymbol"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$"
-                        android:textSize="24sp"
-                        android:textColor="@color/text_secondary"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@id/tvBalance"/>
-
-                    <TextView
-                        android:id="@+id/tvBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="38sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginStart="4dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvBalanceSymbol"/>
-
-                    <!-- Profile Picture -->
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@android:drawable/ic_menu_myplaces"
-                        android:background="@drawable/bg_icon_circle"
-                        android:padding="8dp"
-                        android:backgroundTint="@color/primary_purple"
-                        android:contentDescription="Profile"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
-
-                    <!-- Month Earning Label -->
-                    <TextView
-                        android:id="@+id/tvMonthLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Noviembre"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="4dp"
-                        app:layout_constraintTop_toBottomOf="@id/tvBalance"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <!-- Period Selector -->
-                    <!-- Period Selector -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@drawable/bg_icon_circle"
-                        android:padding="4dp"
-                        android:layout_marginTop="20dp"
-                        app:layout_constraintTop_toBottomOf="@id/tvMonthLabel"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <TextView
-                            android:id="@+id/btnWeek"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Semana"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_primary"
-                            android:textStyle="bold"
-                            android:background="@drawable/bg_period_buttom_selected"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:paddingStart="18dp"
-                            android:paddingEnd="18dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"/>
-
-                        <TextView
-                            android:id="@+id/btnMonth"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Mes"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_secondary"
-                            android:background="@drawable/bg_buttom_selector"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:paddingStart="18dp"
-                            android:paddingEnd="18dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"/>
-
-                        <TextView
-                            android:id="@+id/btnYear"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Año"
-                            android:textSize="13sp"
-                            android:textColor="@color/text_secondary"
-                            android:background="@drawable/bg_buttom_selector"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:paddingStart="18dp"
-                            android:paddingEnd="18dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="8dp"/>
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Content Area -->
+            <!-- Summary Cards -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="24dp">
 
-                <!-- Upcoming Bills Title -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Resumen del Mes"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="12dp"/>
+                <!-- Income Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="#9B7DFF">
 
-                <!-- Summary Cards -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2"
-                    android:layout_marginBottom="24dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <!-- Income Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp"
-                        android:backgroundTint="#9B7DFF">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ingresos"
+                            android:textSize="11sp"
+                            android:textColor="@color/white"
+                            android:alpha="0.8"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                        <TextView
+                            android:id="@+id/tvIncome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Ingresos"
-                                android:textSize="11sp"
-                                android:textColor="@color/white"
-                                android:alpha="0.8"/>
+                <!-- Expense Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/primary_purple">
 
-                            <TextView
-                                android:id="@+id/tvIncome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="$0"
-                                android:textSize="22sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/white"
-                                android:layout_marginTop="8dp"/>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <!-- Expense Card -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp"
-                        android:backgroundTint="@color/primary_purple">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gastos"
+                            android:textSize="11sp"
+                            android:textColor="@color/white"
+                            android:alpha="0.8"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Gastos"
-                                android:textSize="11sp"
-                                android:textColor="@color/white"
-                                android:alpha="0.8"/>
-
-                            <TextView
-                                android:id="@+id/tvExpenses"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="$0"
-                                android:textSize="22sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/white"
-                                android:layout_marginTop="8dp"/>
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-
-                <!-- Week Transactions Title -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Transacciones Recientes"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- Progress Bar -->
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:indeterminateTint="@color/primary_purple"
-                    android:layout_marginVertical="20dp"/>
-
-                <!-- Transactions RecyclerView -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvRecentTransactions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"/>
-
-                <!-- View All Button -->
-                <TextView
-                    android:id="@+id/btnViewAll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ver todas"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_purple"
-                    android:background="@drawable/bg_card"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:layout_marginTop="8dp"
-                    android:visibility="gone"/>
-
-                <!-- Empty State -->
-                <LinearLayout
-                    android:id="@+id/emptyState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="40dp"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📊"
-                        android:textSize="64sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="No hay transacciones"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginTop="12dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Presiona el botón + para agregar"
-                        android:textSize="13sp"
-                        android:textColor="@color/text_secondary"
-                        android:gravity="center"
-                        android:layout_marginTop="4dp"/>
-                </LinearLayout>
-
+                        <TextView
+                            android:id="@+id/tvExpenses"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$0"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
+
+            <!-- Week Transactions Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transacciones Recientes"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Progress Bar -->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:indeterminateTint="@color/primary_purple"
+                android:layout_marginVertical="20dp"/>
+
+            <!-- Transactions RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentTransactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+
+            <!-- View All Button -->
+            <TextView
+                android:id="@+id/btnViewAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver todas"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary_purple"
+                android:background="@drawable/bg_card"
+                android:gravity="center"
+                android:padding="16dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"/>
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="40dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📊"
+                    android:textSize="64sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No hay transacciones"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Presiona el botón + para agregar"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
