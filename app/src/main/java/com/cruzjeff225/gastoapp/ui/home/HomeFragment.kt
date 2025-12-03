@@ -19,11 +19,12 @@ import com.cruzjeff225.gastoapp.adapters.TransactionAdapter
 import com.cruzjeff225.gastoapp.databinding.FragmentHomeBinding
 import com.cruzjeff225.gastoapp.data.model.Transaction
 import com.cruzjeff225.gastoapp.ui.transaction.AddTransactionActivity
-import com.cruzjeff225.gastoapp.ui.transactions.AllTransactionsActivity
+import com.cruzjeff225.gastoapp.ui.transaction.AllTransactionsActivity
 import com.cruzjeff225.gastoapp.utils.gone
 import com.cruzjeff225.gastoapp.utils.showToast
 import com.cruzjeff225.gastoapp.utils.visible
 import java.text.SimpleDateFormat
+import com.cruzjeff225.gastoapp.utils.CustomDialog
 import java.util.*
 import androidx.core.graphics.toColorInt
 
@@ -247,15 +248,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun deleteTransaction(transaction: Transaction) {
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("Eliminar")
-            .setMessage("¿Eliminar esta transacción?")
-            .setPositiveButton("Eliminar") { _, _ ->
-                viewModel.deleteTransaction(transaction.id)
-                requireContext().showToast("Eliminado")
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        CustomDialog.showDeleteConfirmation(
+            requireContext(),
+            transaction.category
+        ) {
+            viewModel.deleteTransaction(transaction.id)
+            requireContext().showToast("Transacción eliminada")
+        }
     }
 
     override fun onResume() {

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp"
+    android:backgroundTint="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Icon -->
+        <FrameLayout
+            android:id="@+id/iconBackground"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_icon_circle"
+            android:backgroundTint="#F3F4F6">
+
+            <TextView
+                android:id="@+id/tvIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="⚠️"
+                android:textSize="32sp"/>
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Título"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Message -->
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mensaje del diálogo"
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- Buttons Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:weightSum="2">
+
+            <!-- Negative Button -->
+            <Button
+                android:id="@+id/btnNegative"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Cancelar"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:background="@drawable/background_button_pressed"
+                android:backgroundTint="#6B7280"
+                android:layout_marginEnd="8dp"/>
+
+            <!-- Positive Button -->
+            <Button
+                android:id="@+id/btnPositive"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Aceptar"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:background="@drawable/background_button_pressed"
+                android:backgroundTint="@color/primary_purple"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

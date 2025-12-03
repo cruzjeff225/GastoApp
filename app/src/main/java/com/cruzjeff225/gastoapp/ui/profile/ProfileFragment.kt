@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cruzjeff225.gastoapp.R
 import com.cruzjeff225.gastoapp.databinding.FragmentProfileBinding
 import com.cruzjeff225.gastoapp.ui.auth.LoginActivity
+import com.cruzjeff225.gastoapp.utils.CustomDialog
+import com.cruzjeff225.gastoapp.utils.InputDialog
 import com.cruzjeff225.gastoapp.utils.gone
 import com.cruzjeff225.gastoapp.utils.showToast
 import com.cruzjeff225.gastoapp.utils.visible
@@ -69,8 +68,12 @@ class ProfileFragment : Fragment() {
 
         viewModel.deleteAccountSuccess.observe(viewLifecycleOwner) { success ->
             if (success) {
-                requireContext().showToast("Cuenta eliminada exitosamente")
-                navigateToLogin()
+                CustomDialog.showSuccess(
+                    requireContext(),
+                    "Tu cuenta ha sido eliminada exitosamente"
+                ) {
+                    navigateToLogin()
+                }
             }
         }
 
@@ -97,7 +100,11 @@ class ProfileFragment : Fragment() {
 
         // Notifications
         binding.cardNotifications.setOnClickListener {
-            requireContext().showToast("Configuración de notificaciones - Próximamente")
+            CustomDialog.showInfo(
+                requireContext(),
+                "Próximamente",
+                "La configuración de notificaciones estará disponible en una próxima actualización."
+            )
         }
 
         // About
@@ -129,117 +136,89 @@ class ProfileFragment : Fragment() {
     private fun showEditProfileDialog() {
         val user = viewModel.user.value ?: return
 
-        val input = EditText(requireContext()).apply {
-            setText(user.fullName)
-            hint = "Nombre completo"
-            setPadding(50, 30, 50, 30)
+        InputDialog.showEditNameDialog(
+            requireContext(),
+            user.fullName
+        ) { newName ->
+            viewModel.updateUserProfile(newName)
+            requireContext().showToast("Perfil actualizado")
         }
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Editar Perfil")
-            .setMessage("Ingresa tu nuevo nombre")
-            .setView(input)
-            .setPositiveButton("Guardar") { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isNotEmpty()) {
-                    viewModel.updateUserProfile(newName)
-                    requireContext().showToast("Perfil actualizado")
-                } else {
-                    requireContext().showToast("El nombre no puede estar vacío")
-                }
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
     }
 
     private fun showChangePasswordDialog() {
-        val view = layoutInflater.inflate(R.layout.dialog_change_password, null)
-        val etCurrentPassword = view.findViewById<EditText>(R.id.etCurrentPassword)
-        val etNewPassword = view.findViewById<EditText>(R.id.etNewPassword)
-        val etConfirmPassword = view.findViewById<EditText>(R.id.etConfirmPassword)
+        val dialog = android.app.Dialog(requireContext())
+        dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Cambiar Contraseña")
-            .setView(view)
-            .setPositiveButton("Cambiar") { _, _ ->
-                val currentPassword = etCurrentPassword.text.toString()
-                val newPassword = etNewPassword.text.toString()
-                val confirmPassword = etConfirmPassword.text.toString()
+        val binding = com.cruzjeff225.gastoapp.databinding.DialogChangePasswordBinding.inflate(layoutInflater)
+        dialog.setContentView(binding.root)
 
-                when {
-                    currentPassword.isEmpty() -> {
-                        requireContext().showToast("Ingresa tu contraseña actual")
-                    }
-                    newPassword.isEmpty() -> {
-                        requireContext().showToast("Ingresa una nueva contraseña")
-                    }
-                    newPassword.length < 6 -> {
-                        requireContext().showToast("La contraseña debe tener al menos 6 caracteres")
-                    }
-                    newPassword != confirmPassword -> {
-                        requireContext().showToast("Las contraseñas no coinciden")
-                    }
-                    else -> {
-                        viewModel.changePassword(currentPassword, newPassword)
-                    }
+        val confirmButton = binding.root.findViewById<android.widget.Button>(com.cruzjeff225.gastoapp.R.id.btnConfirm)
+        val cancelButton = binding.root.findViewById<android.widget.Button>(com.cruzjeff225.gastoapp.R.id.btnCancel)
+
+        confirmButton?.setOnClickListener {
+            val currentPassword = binding.etCurrentPassword.text.toString()
+            val newPassword = binding.etNewPassword.text.toString()
+            val confirmPassword = binding.etConfirmPassword.text.toString()
+
+            when {
+                currentPassword.isEmpty() -> {
+                    requireContext().showToast("Ingresa tu contraseña actual")
+                }
+                newPassword.isEmpty() -> {
+                    requireContext().showToast("Ingresa una nueva contraseña")
+                }
+                newPassword.length < 6 -> {
+                    requireContext().showToast("La contraseña debe tener al menos 6 caracteres")
+                }
+                newPassword != confirmPassword -> {
+                    requireContext().showToast("Las contraseñas no coinciden")
+                }
+                else -> {
+                    viewModel.changePassword(currentPassword, newPassword)
+                    dialog.dismiss()
                 }
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        }
+
+        cancelButton?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun showLogoutDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Cerrar Sesión")
-            .setMessage("¿Estás seguro de que quieres cerrar sesión?")
-            .setPositiveButton("Cerrar Sesión") { _, _ ->
+        CustomDialog.showWarning(
+            requireContext(),
+            "Cerrar Sesión",
+            "¿Estás seguro de que quieres cerrar sesión?",
+            onConfirm = {
                 viewModel.logout()
             }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        )
     }
+
 
     private fun showDeleteAccountDialog() {
-        val input = EditText(requireContext()).apply {
-            hint = "Ingresa tu contraseña"
-            inputType = android.text.InputType.TYPE_CLASS_TEXT or
-                    android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-            setPadding(50, 30, 50, 30)
-        }
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Eliminar Cuenta")
-            .setMessage("⚠️ Esta acción es permanente y eliminará todos tus datos.\n\nIngresa tu contraseña para confirmar:")
-            .setView(input)
-            .setPositiveButton("Eliminar") { _, _ ->
-                val password = input.text.toString()
-                if (password.isNotEmpty()) {
-                    confirmDeleteAccount(password)
-                } else {
-                    requireContext().showToast("Debes ingresar tu contraseña")
-                }
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
-    }
-
-    private fun confirmDeleteAccount(password: String) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("¿Estás completamente seguro?")
-            .setMessage("Se eliminarán:\n• Todas tus transacciones\n• Todas tus metas de ahorro\n• Todos tus datos personales\n\nEsta acción NO se puede deshacer.")
-            .setPositiveButton("Sí, eliminar") { _, _ ->
+        InputDialog.showPasswordDialog(
+            requireContext(),
+            "Eliminar Cuenta",
+            "⚠️ Esta acción es permanente y eliminará todos tus datos.\n\nIngresa tu contraseña para confirmar:"
+        ) { password ->
+            // Show final confirmation
+            CustomDialog.showDeleteAccountConfirmation(requireContext()) {
                 viewModel.deleteAccount(password)
             }
-            .setNegativeButton("No, cancelar", null)
-            .show()
+        }
     }
 
     private fun showAboutDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Acerca de GastoApp")
-            .setMessage("Versión 1.0.0\n\nGastoApp es tu compañero ideal para gestionar tus finanzas personales.\n\nDesarrollado con ❤️")
-            .setPositiveButton("Cerrar", null)
-            .show()
+        CustomDialog.showInfo(
+            requireContext(),
+            "Acerca de GastoApp",
+            "Versión 1.0.0\n\nGastoApp es tu compañero ideal para gestionar tus finanzas personales.\n\n"
+        )
     }
 
     private fun navigateToLogin() {

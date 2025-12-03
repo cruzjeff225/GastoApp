@@ -1,4 +1,4 @@
-package com.cruzjeff225.gastoapp.ui.transactions
+package com.cruzjeff225.gastoapp.ui.transaction
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -8,6 +8,7 @@ import com.cruzjeff225.gastoapp.adapters.TransactionAdapter
 import com.cruzjeff225.gastoapp.databinding.ActivityAllTransactionsBinding
 import com.cruzjeff225.gastoapp.data.model.Transaction
 import com.cruzjeff225.gastoapp.ui.home.HomeViewModel
+import com.cruzjeff225.gastoapp.utils.CustomDialog
 import com.cruzjeff225.gastoapp.utils.gone
 import com.cruzjeff225.gastoapp.utils.showToast
 import com.cruzjeff225.gastoapp.utils.visible
@@ -105,14 +106,12 @@ class AllTransactionsActivity : AppCompatActivity() {
     }
 
     private fun deleteTransaction(transaction: Transaction) {
-        androidx.appcompat.app.AlertDialog.Builder(this)
-            .setTitle("Eliminar")
-            .setMessage("¿Eliminar esta transacción?")
-            .setPositiveButton("Eliminar") { _, _ ->
-                viewModel.deleteTransaction(transaction.id)
-                showToast("Eliminado")
-            }
-            .setNegativeButton("Cancelar", null)
-            .show()
+        CustomDialog.showDeleteConfirmation(
+            this,
+            transaction.category
+        ) {
+            viewModel.deleteTransaction(transaction.id)
+            showToast("Transacción eliminada")
+        }
     }
 }
