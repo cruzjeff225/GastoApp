@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Colores Light Mode -->
-    <color name="background_light_primary">#F5F5F5</color>
+    <color name="background_light_primary">#FAFBFC</color>
     <color name="background_light_secondary">#FFFFFF</color>
-    <color name="background_gradient_start">#F5F5F5</color>
-    <color name="background_gradient_end">#E8E8E8</color>
+    <color name="background_gradient_start">#FAFBFC</color>
+    <color name="background_gradient_end">#F5F6F7</color>
 
     <!-- Colores de la tarjeta y componentes -->
     <color name="card_background">#FFFFFF</color>
-    <color name="primary_teal">#00D4AA</color>
-    <color name="primary_teal_light">#5FEDD8</color>
-    <color name="primary_green">#34D399</color>
-    <color name="primary_purple">#7C3AED</color>
+    <color name="primary_teal">#10B981</color>
+    <color name="primary_teal_light">#34D399</color>
+    <color name="primary_green">#10B981</color>
+    <color name="primary_purple">#8B5CF6</color>
 
     <!-- Colores de texto -->
-    <color name="text_primary">#1F2937</color>
+    <color name="text_primary">#111827</color>
     <color name="text_secondary">#6B7280</color>
     <color name="text_white">#FFFFFF</color>
     <color name="text_hint">#9CA3AF</color>
@@ -22,16 +22,16 @@
     <!-- Colores de inputs -->
     <color name="input_background">#F9FAFB</color>
     <color name="input_border">#E5E7EB</color>
-    <color name="input_focused">#00D4AA</color>
+    <color name="input_focused">#8B5CF6</color>
 
     <!-- Colores de botones -->
-    <color name="button_primary">#7C3AED</color>
-    <color name="button_primary_dark">#6D28D9</color>
-    <color name="button_gradient_start">#7C3AED</color>
-    <color name="button_gradient_end">#6D28D9</color>
+    <color name="button_primary">#8B5CF6</color>
+    <color name="button_primary_dark">#7C3AED</color>
+    <color name="button_gradient_start">#8B5CF6</color>
+    <color name="button_gradient_end">#7C3AED</color>
 
     <!-- Colores de acento -->
-    <color name="accent_coral">#FF8A73</color>
+    <color name="accent_coral">#F59E0B</color>
     <color name="accent_orange">#FB923C</color>
 
     <!-- Colores de redes sociales -->
@@ -50,6 +50,8 @@
     <color name="info">#3B82F6</color>
 
     <!-- Icon Adapter colors -->
-    <color name="icon_selected_background">#E8F5E9</color>
-    <color name="icon_unselected_background">#F5F5F7</color>
+    <color name="icon_selected_background">#F0FDF4</color>
+    <color name="icon_unselected_background">#F9FAFB</color>
+    
+    <color name="ripple_grey">#336B7280</color>
 </resources>

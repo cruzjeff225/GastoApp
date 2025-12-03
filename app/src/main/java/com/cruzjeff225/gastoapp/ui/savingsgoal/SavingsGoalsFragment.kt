@@ -112,10 +112,6 @@ class SavingsGoalsFragment : Fragment() {
             val intent = Intent(requireContext(), AddSavingsGoalActivity::class.java)
             addEditGoalLauncher.launch(intent)
         }
-
-        binding.ivProfile.setOnClickListener {
-            requireContext().showToast("Perfil")
-        }
     }
 
     private fun showGoalDetails(goal: SavingsGoal) {

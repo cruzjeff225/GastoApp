@@ -43,17 +43,6 @@
                             android:textColor="@color/text_primary"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"/>
-
-                        <ImageView
-                            android:id="@+id/ivProfile"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@android:drawable/ic_menu_myplaces"
-                            android:background="@drawable/bg_icon_circle"
-                            android:padding="8dp"
-                            android:backgroundTint="@color/primary_purple"
-                            android:contentDescription="Profile"
-                            android:layout_alignParentEnd="true"/>
                     </RelativeLayout>
 
                     <!-- Total Saved -->
@@ -63,7 +52,7 @@
                         android:orientation="vertical"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/bg_card"
-                        android:backgroundTint="#F0E7FF"
+                        android:backgroundTint="#D1FAE5"
                         android:padding="16dp">
 
                         <TextView
@@ -84,7 +73,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="$"
                                 android:textSize="20sp"
-                                android:textColor="@color/primary_purple"
+                                android:textColor="@color/text_secondary"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -94,7 +83,7 @@
                                 android:text="0"
                                 android:textSize="28sp"
                                 android:textStyle="bold"
-                                android:textColor="@color/primary_purple"
+                                android:textColor="@color/text_secondary"
                                 android:layout_marginStart="4dp"/>
 
                             <TextView
@@ -198,7 +187,7 @@
         android:src="@android:drawable/ic_input_add"
         android:contentDescription="Agregar meta"
         app:tint="@color/white"
-        app:backgroundTint="@color/primary_purple"
+        app:backgroundTint="@color/success"
         android:elevation="6dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

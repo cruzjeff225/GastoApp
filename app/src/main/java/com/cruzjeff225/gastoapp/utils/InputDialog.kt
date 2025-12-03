@@ -42,6 +42,7 @@ class InputDialog {
             binding.tvMessage.text = "Meta: $goalName\nActual: $${String.format("%,.0f", currentAmount)}\nFalta: $${String.format("%,.0f", remainingAmount)}"
             binding.etInput.hint = "Monto a agregar"
             binding.etInput.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+            binding.btnPositive.setBackgroundColor("#10B981".toColorInt())
 
             binding.btnNegative.setOnClickListener {
                 dialog.dismiss()

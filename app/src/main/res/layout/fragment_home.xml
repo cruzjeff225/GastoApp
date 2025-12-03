@@ -151,7 +151,7 @@
                 android:weightSum="2"
                 android:layout_marginBottom="24dp">
 
-                <!-- Income Card -->
+                <!-- Income Card - VERDE SUAVE -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -159,7 +159,7 @@
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="0dp"
-                    android:backgroundTint="#9B7DFF">
+                    android:backgroundTint="#D1FAE5">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -172,8 +172,8 @@
                             android:layout_height="wrap_content"
                             android:text="Ingresos"
                             android:textSize="11sp"
-                            android:textColor="@color/white"
-                            android:alpha="0.8"/>
+                            android:textColor="#065F46"
+                            android:alpha="0.9"/>
 
                         <TextView
                             android:id="@+id/tvIncome"
@@ -182,12 +182,12 @@
                             android:text="$0"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="@color/white"
+                            android:textColor="#065F46"
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Expense Card -->
+                <!-- Expense Card - ROJO SUAVE -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
@@ -195,7 +195,7 @@
                     android:layout_marginStart="8dp"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="0dp"
-                    android:backgroundTint="@color/primary_purple">
+                    android:backgroundTint="#FEE2E2">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -208,8 +208,8 @@
                             android:layout_height="wrap_content"
                             android:text="Gastos"
                             android:textSize="11sp"
-                            android:textColor="@color/white"
-                            android:alpha="0.8"/>
+                            android:textColor="#991B1B"
+                            android:alpha="0.9"/>
 
                         <TextView
                             android:id="@+id/tvExpenses"
@@ -218,7 +218,7 @@
                             android:text="$0"
                             android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="@color/white"
+                            android:textColor="#991B1B"
                             android:layout_marginTop="8dp"/>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -258,7 +258,7 @@
                 android:text="Ver todas"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/primary_purple"
+                android:textColor="@color/success"
                 android:background="@drawable/bg_card"
                 android:gravity="center"
                 android:padding="16dp"
@@ -313,7 +313,7 @@
         android:src="@android:drawable/ic_input_add"
         android:contentDescription="Agregar transacción"
         app:tint="@color/white"
-        app:backgroundTint="@color/primary_purple"
+        app:backgroundTint="@color/success"
         android:elevation="6dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
