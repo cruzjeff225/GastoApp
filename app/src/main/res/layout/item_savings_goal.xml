@@ -72,12 +72,14 @@
             <!-- Options Menu -->
             <ImageView
                 android:id="@+id/btnOptions"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@android:drawable/ic_menu_more"
-                android:background="@drawable/bg_icon_circle"
+                android:background="@drawable/bg_icon_button"
                 android:padding="6dp"
                 android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:focusable="true"
                 android:contentDescription="Opciones"/>
         </RelativeLayout>
 

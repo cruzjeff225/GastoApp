@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
 import com.cruzjeff225.gastoapp.databinding.DialogInputBinding
+import androidx.core.graphics.toColorInt
+import androidx.core.graphics.drawable.toDrawable
 
 class InputDialog {
 
@@ -22,7 +24,7 @@ class InputDialog {
         ) {
             val dialog = Dialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
@@ -67,7 +69,7 @@ class InputDialog {
         ) {
             val dialog = Dialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
@@ -80,7 +82,7 @@ class InputDialog {
 
             // Setup
             binding.tvIcon.text = "✏️"
-            binding.iconBackground.setBackgroundColor(Color.parseColor("#F0E7FF"))
+            binding.iconBackground.setBackgroundColor("#F0E7FF".toColorInt())
             binding.tvTitle.text = "Editar Perfil"
             binding.tvMessage.text = "Ingresa tu nuevo nombre"
             binding.etInput.hint = "Nombre completo"
@@ -115,7 +117,7 @@ class InputDialog {
         ) {
             val dialog = Dialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
@@ -128,14 +130,14 @@ class InputDialog {
 
             // Setup
             binding.tvIcon.text = "🔒"
-            binding.iconBackground.setBackgroundColor(Color.parseColor("#FFEBEE"))
+            binding.iconBackground.setBackgroundColor("#FFEBEE".toColorInt())
             binding.tvTitle.text = title
             binding.tvMessage.text = message
             binding.etInput.hint = "Ingresa tu contraseña"
             binding.etInput.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 
             binding.btnPositive.text = "Confirmar"
-            binding.btnPositive.setBackgroundColor(Color.parseColor("#EF4444"))
+            binding.btnPositive.setBackgroundColor("#EF4444".toColorInt())
 
             binding.btnNegative.setOnClickListener {
                 dialog.dismiss()
@@ -183,9 +185,9 @@ class InputDialog {
             // Setup
             binding.tvIcon.text = icon
             try {
-                binding.iconBackground.setBackgroundColor(Color.parseColor(iconBackgroundColor))
+                binding.iconBackground.setBackgroundColor(iconBackgroundColor.toColorInt())
             } catch (e: Exception) {
-                binding.iconBackground.setBackgroundColor(Color.parseColor("#F3F4F6"))
+                binding.iconBackground.setBackgroundColor("#F3F4F6".toColorInt())
             }
             binding.tvTitle.text = title
             binding.tvMessage.text = message
