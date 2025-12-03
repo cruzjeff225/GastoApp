@@ -19,6 +19,7 @@ import com.cruzjeff225.gastoapp.adapters.TransactionAdapter
 import com.cruzjeff225.gastoapp.databinding.FragmentHomeBinding
 import com.cruzjeff225.gastoapp.data.model.Transaction
 import com.cruzjeff225.gastoapp.ui.transaction.AddTransactionActivity
+import com.cruzjeff225.gastoapp.ui.transactions.AllTransactionsActivity
 import com.cruzjeff225.gastoapp.utils.gone
 import com.cruzjeff225.gastoapp.utils.showToast
 import com.cruzjeff225.gastoapp.utils.visible
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: TransactionAdapter
 
     private var selectedPeriod = "Semana"
+    private var allTransactions = listOf<Transaction>()
+    private val MAX_VISIBLE_TRANSACTIONS = 5
 
     // Activity result launcher
     private val addTransactionLauncher = registerForActivityResult(
@@ -97,20 +100,33 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.transactions.observe(viewLifecycleOwner) { transactions ->
+            allTransactions = transactions
 
             if (transactions.isEmpty()) {
                 binding.emptyState.visible()
                 binding.rvRecentTransactions.gone()
+                binding.btnViewAll.gone()
                 adapter.submitList(emptyList())
             } else {
                 binding.emptyState.gone()
                 binding.rvRecentTransactions.visible()
 
+                // Filter by selected period
                 val filteredTransactions = filterTransactionsByPeriod(transactions)
 
-                // Crear una nueva lista para forzar la actualización
-                adapter.submitList(filteredTransactions.toList()) {
+                // Show only first 5 transactions
+                val visibleTransactions = filteredTransactions.take(MAX_VISIBLE_TRANSACTIONS)
+
+                // Show "Ver todas" button if there are more than 5 transactions
+                if (filteredTransactions.size > MAX_VISIBLE_TRANSACTIONS) {
+                    binding.btnViewAll.visible()
+                    val remainingCount = filteredTransactions.size - MAX_VISIBLE_TRANSACTIONS
+                    binding.btnViewAll.text = "Ver todas ($remainingCount más)"
+                } else {
+                    binding.btnViewAll.gone()
                 }
+
+                adapter.submitList(visibleTransactions.toList())
             }
         }
 
@@ -147,6 +163,15 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), AddTransactionActivity::class.java)
             addTransactionLauncher.launch(intent)
         }
+
+        // View all transactions button
+        binding.btnViewAll.setOnClickListener {
+            val filteredTransactions = filterTransactionsByPeriod(allTransactions)
+            val intent = Intent(requireContext(), AllTransactionsActivity::class.java).apply {
+                putExtra("period", selectedPeriod)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun selectPeriod(period: String, selectedButton: TextView) {
@@ -160,11 +185,20 @@ class HomeFragment : Fragment() {
         selectedButton.setTextColor("#2C2C2C".toColorInt())
         selectedButton.setTypeface(null, Typeface.BOLD)
 
-        // Refresh list
-        viewModel.transactions.value?.let { transactions ->
-            val filtered = filterTransactionsByPeriod(transactions)
-            adapter.submitList(filtered.toList())
+        // Refresh list with filter
+        val filtered = filterTransactionsByPeriod(allTransactions)
+        val visible = filtered.take(MAX_VISIBLE_TRANSACTIONS)
+
+        // Update "Ver todas" button visibility
+        if (filtered.size > MAX_VISIBLE_TRANSACTIONS) {
+            binding.btnViewAll.visible()
+            val remainingCount = filtered.size - MAX_VISIBLE_TRANSACTIONS
+            binding.btnViewAll.text = "Ver todas ($remainingCount más)"
+        } else {
+            binding.btnViewAll.gone()
         }
+
+        adapter.submitList(visible.toList())
     }
 
     private fun resetPeriodButtons() {
@@ -226,7 +260,6 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // Refresh data when fragment resumes
         refreshData()
     }
 
