@@ -87,7 +87,7 @@ class AddTransactionActivity : AppCompatActivity() {
                 binding.btnExpense.setTextColor(getColor(R.color.text_primary))
                 binding.btnExpense.setTypeface(null, android.graphics.Typeface.BOLD)
 
-                binding.btnIncome.setBackgroundResource(android.R.color.transparent)
+                binding.btnIncome.setBackgroundResource(R.drawable.bg_buttom_selector)
                 binding.btnIncome.setTextColor(getColor(R.color.text_secondary))
                 binding.btnIncome.setTypeface(null, android.graphics.Typeface.NORMAL)
             }
@@ -96,7 +96,7 @@ class AddTransactionActivity : AppCompatActivity() {
                 binding.btnIncome.setTextColor(getColor(R.color.text_primary))
                 binding.btnIncome.setTypeface(null, android.graphics.Typeface.BOLD)
 
-                binding.btnExpense.setBackgroundResource(android.R.color.transparent)
+                binding.btnExpense.setBackgroundResource(R.drawable.bg_buttom_selector)
                 binding.btnExpense.setTextColor(getColor(R.color.text_secondary))
                 binding.btnExpense.setTypeface(null, android.graphics.Typeface.NORMAL)
             }

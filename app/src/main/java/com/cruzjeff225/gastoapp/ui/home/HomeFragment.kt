@@ -178,12 +178,12 @@ class HomeFragment : Fragment() {
     private fun selectPeriod(period: String, selectedButton: TextView) {
         selectedPeriod = period
 
-        // Clear all buttons
+        // Clear all buttons - reset to transparent background and secondary text
         resetPeriodButtons()
 
-        // Highlight selected
+        // Highlight selected with white background and primary text (bold)
         selectedButton.setBackgroundResource(R.drawable.bg_period_buttom_selected)
-        selectedButton.setTextColor("#2C2C2C".toColorInt())
+        selectedButton.setTextColor(resources.getColor(R.color.text_primary, null))
         selectedButton.setTypeface(null, Typeface.BOLD)
 
         // Refresh list with filter
@@ -204,8 +204,8 @@ class HomeFragment : Fragment() {
 
     private fun resetPeriodButtons() {
         listOf(binding.btnWeek, binding.btnMonth, binding.btnYear).forEach { button ->
-            button.setBackgroundColor(Color.TRANSPARENT)
-            button.setTextColor("#757575".toColorInt())
+            button.setBackgroundResource(R.drawable.bg_buttom_selector)
+            button.setTextColor(resources.getColor(R.color.text_secondary, null))
             button.setTypeface(null, Typeface.NORMAL)
         }
     }

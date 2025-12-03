@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.InputType
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.view.Window
 import com.cruzjeff225.gastoapp.databinding.DialogInputBinding
 
@@ -26,12 +27,17 @@ class InputDialog {
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
 
+            // Set dialog width to 90% of screen width
+            dialog.window?.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
             // Setup
             binding.tvIcon.text = "💰"
             binding.iconBackground.setBackgroundColor(Color.parseColor("#E8F5E9"))
-            binding.tvTitle.text = "Agregar dinero a $goalName"
-            binding.tvMessage.text = "Monto actual: $${String.format("%,.0f", currentAmount)}\n" +
-                    "Falta: $${String.format("%,.0f", remainingAmount)}"
+            binding.tvTitle.text = "Agregar dinero"
+            binding.tvMessage.text = "Meta: $goalName\nActual: $${String.format("%,.0f", currentAmount)}\nFalta: $${String.format("%,.0f", remainingAmount)}"
             binding.etInput.hint = "Monto a agregar"
             binding.etInput.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
 
@@ -65,6 +71,12 @@ class InputDialog {
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
+
+            // Set dialog width to 90% of screen width
+            dialog.window?.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
 
             // Setup
             binding.tvIcon.text = "✏️"
@@ -107,6 +119,12 @@ class InputDialog {
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
+
+            // Set dialog width to 90% of screen width
+            dialog.window?.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
 
             // Setup
             binding.tvIcon.text = "🔒"
@@ -155,6 +173,12 @@ class InputDialog {
 
             val binding = DialogInputBinding.inflate(LayoutInflater.from(context))
             dialog.setContentView(binding.root)
+
+            // Set dialog width to 90% of screen width
+            dialog.window?.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
 
             // Setup
             binding.tvIcon.text = icon

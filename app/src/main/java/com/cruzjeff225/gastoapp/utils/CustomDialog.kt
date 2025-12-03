@@ -5,7 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
-import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import com.cruzjeff225.gastoapp.databinding.DialogCustomBinding
 
@@ -49,6 +49,12 @@ class CustomDialog(private val context: Context) {
             dialog.setContentView(binding.root)
             dialog.setCancelable(cancelable)
 
+            // Set dialog width to 90% of screen width
+            dialog.window?.setLayout(
+                (context.resources.displayMetrics.widthPixels * 0.9).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
             // Set icon
             binding.tvIcon.text = icon
             try {
@@ -76,7 +82,7 @@ class CustomDialog(private val context: Context) {
 
             // Set negative button
             if (showNegativeButton) {
-                binding.btnNegative.visibility = View.VISIBLE
+                binding.btnNegative.visibility = android.view.View.VISIBLE
                 binding.btnNegative.text = negativeButtonText
                 try {
                     binding.btnNegative.setBackgroundColor(Color.parseColor(negativeButtonColor))
@@ -89,7 +95,7 @@ class CustomDialog(private val context: Context) {
                     dialog.dismiss()
                 }
             } else {
-                binding.btnNegative.visibility = View.GONE
+                binding.btnNegative.visibility = android.view.View.GONE
             }
 
             return dialog

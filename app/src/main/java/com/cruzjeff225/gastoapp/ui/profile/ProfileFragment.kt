@@ -153,6 +153,12 @@ class ProfileFragment : Fragment() {
         val binding = com.cruzjeff225.gastoapp.databinding.DialogChangePasswordBinding.inflate(layoutInflater)
         dialog.setContentView(binding.root)
 
+        // Set dialog width to 90% of screen width
+        dialog.window?.setLayout(
+            (resources.displayMetrics.widthPixels * 0.9).toInt(),
+            android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
         val confirmButton = binding.root.findViewById<android.widget.Button>(com.cruzjeff225.gastoapp.R.id.btnConfirm)
         val cancelButton = binding.root.findViewById<android.widget.Button>(com.cruzjeff225.gastoapp.R.id.btnCancel)
 

@@ -38,11 +38,6 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(SavingsGoalsFragment())
                     true
                 }
-                R.id.navigation_stats -> {
-                    // Create StatsFragment
-                    showToast("Estadísticas - Próximamente")
-                    false
-                }
                 R.id.navigation_profile -> {
                     // Create ProfileFragment
                     loadFragment(ProfileFragment())
